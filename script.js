@@ -15,13 +15,13 @@ let score = 0;
 let highestScore = localStorage.getItem('highestScore') || 0;
 
 const bird = new Image();
-bird.src = "hasina-cartoon-removebg-preview.png"; // Your bird image
+bird.src = "https://raw.githubusercontent.com/Auntor-00/FlappyHasina/main/hasina-mgi-png.png"; // Bird image
 
 const background = new Image();
-background.src = "vector-style_illustration_of_Indian_slums,_showcas.png"; // Your background image
+background.src = "https://raw.githubusercontent.com/Auntor-00/FlappyHasina/main/indian-slum-png.png"; // Background image
 
 const poop = new Image();
-poop.src = "basic_shit_emoji,_simple_and_clear_design_with_the.png"; // Your poop emoji image
+poop.src = "https://raw.githubusercontent.com/Auntor-00/FlappyHasina/main/shit-png.png"; // Transparent poop emoji
 
 const pipes = [];
 const pipeWidth = 50;
