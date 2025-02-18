@@ -1,9 +1,11 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = 320;
-canvas.height = 480;
+// Adjust canvas size based on window size for mobile responsiveness
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
+// Variables
 const GRAVITY = 0.6;
 const FLAP = -12;
 let birdY = canvas.height / 2;
@@ -14,6 +16,7 @@ let isPaused = false;
 let score = 0;
 let highestScore = localStorage.getItem('highestScore') || 0;
 
+// Images
 const bird = new Image();
 bird.src = "https://raw.githubusercontent.com/Auntor-00/FlappyHasina/main/hasina-mgi-png.png"; // Bird image
 
@@ -31,12 +34,13 @@ let poopTimer = 0;
 let poopVisible = false;
 let speedModifier = 1;
 
-function drawBird() {
-    ctx.drawImage(bird, 50, birdY, 40, 40);
+// Functions
+function drawBackground() {
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height); // Make the background cover the full canvas
 }
 
-function drawBackground() {
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+function drawBird() {
+    ctx.drawImage(bird, 50, birdY, 40, 40); // Bird image positioning
 }
 
 function drawPipes() {
@@ -66,7 +70,7 @@ function updatePipes() {
 
 function showPoop() {
     if (poopVisible) {
-        ctx.drawImage(poop, canvas.width / 2, birdY + 10, 30, 30);
+        ctx.drawImage(poop, canvas.width / 2, birdY + 10, 30, 30); // Show the poop emoji when visible
     }
 }
 
@@ -115,6 +119,14 @@ function drawGame() {
     requestAnimationFrame(drawGame);
 }
 
+// Button Event Listeners
+document.getElementById("startButton").addEventListener("click", startGame);
+document.getElementById("pauseButton").addEventListener("click", pauseGame);
+document.getElementById("resumeButton").addEventListener("click", resumeGame);
+document.getElementById("exitButton").addEventListener("click", exitGame);
+document.getElementById("highestScoreButton").addEventListener("click", showHighestScore);
+
+// Start the game
 function startGame() {
     isGameRunning = true;
     isPaused = false;
@@ -133,6 +145,7 @@ function startGame() {
     drawGame();
 }
 
+// Pause and Resume Functions
 function pauseGame() {
     isPaused = true;
     document.getElementById("resumeButton").style.display = "inline-block";
@@ -157,12 +170,7 @@ function showHighestScore() {
     alert("সর্বোচ্চ স্কোর: " + highestScore);
 }
 
-document.getElementById("startButton").addEventListener("click", startGame);
-document.getElementById("pauseButton").addEventListener("click", pauseGame);
-document.getElementById("resumeButton").addEventListener("click", resumeGame);
-document.getElementById("exitButton").addEventListener("click", exitGame);
-document.getElementById("highestScoreButton").addEventListener("click", showHighestScore);
-
+// Keydown Event
 document.addEventListener("keydown", () => {
     if (!isGameRunning || isPaused) return;
     birdFlap = true;
